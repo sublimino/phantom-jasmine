@@ -6,21 +6,31 @@
     "bdd",
     "headless"
   ],
-  "author": "Joshua Carver",
+  "author": {
+    "name": "Joshua Carver"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/jcarver989/phantom-jasmine.git"
   },
   "main": "lib/run_jasmine_test.coffee",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "bin": {
     "phantom-jasmine": "./bin/phantom-jasmine"
   },
   "preferGlobal": true,
-  "dependencies": {},
+  "dependencies": {
+    "walkdir": "0.0.4",
+    "mustache": "0.5.2",
+    "glob": "3.1.12",
+    "commander": "1.0.3"
+  },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
     "node": "*"
-  }
+  },
+  "readme": "Installation\n-------------------\n\n    brew install phantomjs\n    sudo npm install phantom-jasmine -g\n\n\nLoading source files\n--------------------\n\nBy default phantom-jasmine will look for a json file in `spec/config.json`. Use this to list all the scripts you want to load before your specs. e.g.\n\n    [ \n      'lib/jquery.js',\n      'app/**/*.js'\n\t]\n\nIf you want to put this file elsewhere use the `--config` flag, e.g.\n\n    phantom-jasmine --config tests/config.json\n\n\nRunning Tests\n-------------------\n\n    phantom-jasmine\n\nOr run specific specs\n\n    phantom-jasmine spec/path/my_spec.js\n    phantom-jasmine spec/path/\n\nIf everything works you should see output like this in your terminal:\n\n    Util : should fail for the example\n    Error: Expected false to be truthy.\n\n    Finished\n    -----------------\n    3 specs, 1 failure in 0.024s.\n",
+  "_id": "phantom-jasmine@0.3.0",
+  "_from": "phantom-jasmine"
 }

@@ -1,29 +1,34 @@
-Phantom-Jasmine
-=====================
-
-Phantom-Jasmine is a simple set of two scripts for running your Jasmine Tests via Phantom.js (http://www.phantomjs.org/).
-The first script lib/console-runner.js is a plugin to Jasmine that outputs test results (with ansi color codes) via console.log (included with a script tag inside TestRunner.html).
-The second script lib/run_jasmine_test.coffee takes an html file as it's first and only argument and then executes any Jasmine tests
-that file loads. See below for more detail.
-
-
 Installation
 -------------------
 
-Assuming you have PhantomJs setup and installed...
-
+    brew install phantomjs
     sudo npm install phantom-jasmine -g
+
+
+Loading source files
+--------------------
+
+By default phantom-jasmine will look for a json file in `spec/config.json`. Use this to list all the scripts you want to load before your specs. e.g.
+
+    [ 
+      'lib/jquery.js',
+      'app/**/*.js'
+	]
+
+If you want to put this file elsewhere use the `--config` flag, e.g.
+
+    phantom-jasmine --config tests/config.json
 
 
 Running Tests
 -------------------
 
-    phantom-jasmine examples/TestRunner.html
+    phantom-jasmine
 
-On some running OS X you might have to pass in the full url, ex:
+Or run specific specs
 
-    phantom-jasmine file://localhost/Users/bob/phantom-jasmine/examples/TestRunner.html 
-
+    phantom-jasmine spec/path/my_spec.js
+    phantom-jasmine spec/path/
 
 If everything works you should see output like this in your terminal:
 
@@ -33,6 +38,3 @@ If everything works you should see output like this in your terminal:
     Finished
     -----------------
     3 specs, 1 failure in 0.024s.
-    
-
-To run your own tests with Phantom-Jasmine just look at TestRunner.html and modify/copy the script tags accordingly.

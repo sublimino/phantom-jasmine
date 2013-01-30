@@ -16,8 +16,4 @@ describe("Util", function() {
 
     expect(result).toEqual(6);
   });
-
-  it ("should fail for the example", function() {
-    expect(false).toBeTruthy();
-  });
 });

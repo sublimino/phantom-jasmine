@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 
-var exec = require('child_process').exec;
-var path = require('path');
-var lib = path.join(__dirname, './../lib');
+var jasmine = require('../lib');
+var program = require('commander');
 
-var cmds = [
-  'phantomjs',
-  path.join(lib, 'run_jasmine_test.coffee'),
-  process.argv[2]
-];
+program
+  .version('0.2.9')
+  .option('-t, --trace', 'Show full stack trace on error')
+  .option('-c, --config [file]', 'Path to config file', 'spec/config.json')
+  .option('-f, --format [type]', 'Spec output format. [doc]', 'none')
+  .parse(process.argv);
 
-exec(cmds.join(' '), function(err, stdout, stderr) {
-  console.log(stdout);
-});
+jasmine(program);
