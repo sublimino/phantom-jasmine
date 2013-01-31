@@ -2,7 +2,7 @@ Installation
 -------------------
 
     brew install phantomjs
-    sudo npm install phantom-jasmine -g
+    sudo npm install -g --force https://github.com/sublimino/phantom-jasmine/archive/0.3.1.tar.gz
 
 
 Loading source files
