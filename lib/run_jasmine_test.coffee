@@ -4,6 +4,8 @@
 # @page is a PhantomJs page object
 # @exit_func is the function to call in order to exit the script
 
+fs = require("fs")
+
 class PhantomJasmineRunner
   constructor: (@page, @exit_func = phantom.exit) ->
     @tries = 0
@@ -28,7 +30,18 @@ runner = new PhantomJasmineRunner(page)
 
 # Don't supress console output
 page.onConsoleMessage = (msg) ->
-  console.log msg
+
+  substring = msg.substring(0, 5)
+
+  if substring is "junit"
+    xmlStartPosition = msg.indexOf(" ", 6)
+    filename = msg.substring(6, xmlStartPosition)
+    xml = msg.substring(xmlStartPosition + 1)
+    filepath = "test/output/" + filename
+    fs.write filepath, xml, "w"
+
+  else
+    console.log msg
 
   finished = page.evaluate(-> console_reporter.finished)
 
@@ -38,6 +51,7 @@ page.onConsoleMessage = (msg) ->
 address = phantom.args[0]
 
 page.open address, (status) ->
+
   if status != "success"
     console.log "can't load the address!"
     phantom.exit 1
